@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CMSTUDIOS | Website Development</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #001f3f;
+      --purple: #3c1361;
+      --white: #ffffff;
+      --yellow: #ffcc00;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--navy);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+
+    nav .logo img {
+      height: 60px;
+      vertical-align: middle;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.3s;
+      cursor: pointer;
+      display: inline-block;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--yellow);
+      transition: width 0.3s;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    nav ul li a:hover {
+      color: var(--yellow);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--white);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: var(--navy);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 20px;
+        border-radius: 0 0 0 10px;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: var(--white);
+      padding: 100px 20px 60px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin: 10px 0 20px;
+    }
+
+    .logout-icon {
+      color: var(--white);
+      font-size: 1.3rem;
+      cursor: pointer;
+      margin-left: 15px;
+      transition: color 0.3s;
+    }
+
+.logout-icon:hover {
+  color: var(--yellow);
+}
+
+
+    .btn {
+      background: var(--yellow);
+      color: var(--navy);
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: background 0.3s;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn:hover {
+      background: #e6b800;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .services, .projects, .why-us {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 15px;
+      transition: transform 0.3s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #0f2027;
+    }
+
+    form {
+      background: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      display: grid;
+      gap: 15px;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    footer {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
+    .socials a {
+      color: var(--yellow);
+      margin: 0 10px;
+      font-size: 1.2rem;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #0f2027;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      .btn { padding: 10px 20px; }
+    }
+
+    /* === BUBBLE EFFECT CSS === */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 204, 0, 0.7);
+      animation: bubble-float 0.8s ease-out forwards;
+      pointer-events: none;
+      z-index: 10;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes bubble-float {
+      0% {
+        transform: scale(0.5);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-80px) scale(2);
+        opacity: 0;
+      }
+    }
+
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: var(--navy);
+  color: var(--white);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 300px;
+  width: 90%;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+@keyframes fadeIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">
+       <img src="CMStudio.png" alt="CMSTUDIOS Logo" style="height: 60px;">
+    </div>
+
+    <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('show')">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="logout-icon" onclick="logoutUser()">
+      <i class="fas fa-right-from-bracket"></i>
+    </div>
+  </nav>
+  <!-- Logout Confirmation Modal -->
+<div id="logoutModal" class="modal">
+  <div class="modal-content">
+    <p>Are you sure you want to log out?</p>
+    <div class="modal-buttons">
+      <button id="confirmLogout" class="btn">Yes, Logout</button>
+      <button id="cancelLogout" class="btn" style="background: transparent; color: white; border: 1px solid white;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Hero Section -->
+  <header>
+    <h1>We Build Websites That Build Your Business</h1>
+    <p>Professional web development services by CMSTUDIOS</p>
+    <a href="#contact" class="btn">Get a Free Quote</a>
+  </header>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About CMSTUDIOS</h2>
+    <p>CMSTUDIOS is a creative digital studio specializing in modern, responsive, and high-performing websites for businesses, creators, and brands. We blend design and code to help you make a strong digital impact.</p>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <h2>Our Web Services</h2>
+    <div class="services">
+      <div class="card"><i class="fas fa-laptop-code"></i><h3>Custom Website Design</h3><p>Unique and visually engaging designs tailored for your brand.</p></div>
+      <div class="card"><i class="fas fa-mobile-alt"></i><h3>Responsive Design</h3><p>Perfect look across all devices: mobile, tablet, and desktop.</p></div>
+      <div class="card"><i class="fas fa-shopping-cart"></i><h3>E-Commerce</h3><p>Set up your online shop and start selling with confidence.</p></div>
+      <div class="card"><i class="fas fa-briefcase"></i><h3>Portfolio & Business Sites</h3><p>Professional platforms to showcase your work or services.</p></div>
+
+      <div class="card">
+        <i class="fas fa-tools"></i>
+        <h3>Maintenance</h3>
+        <p>We keep your site updated, secure, and running smoothly.</p>
+        <a href="To_Buy.html" class="btn">Maintenance</a>
+      </div>
+
+      <!-- Added Buy Domains Card -->
+      <div class="card">
+        <i class="fas fa-globe"></i>
+        <h3>Buy Domains</h3>
+        <p>Purchase premium domains directly from us to boost your online presence.</p>
+        <a href="To_Buy.html" class="btn">Buy Domains</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Featured Projects</h2>
+    <div class="projects">
+      <div class="card"><h3>Studio Portfolio Site</h3><p>A clean, minimal website for showcasing creative work.</p></div>
+      <div class="card"><h3>Online Store</h3><p>A bold, colorful e-commerce platform with product listings and cart.</p></div>
+      <div class="card"><h3>Business Profile Site</h3><p>Corporate look & feel with service listings and contact forms.</p></div>
+    </div>
+  </section>
+
+  <!-- Why Us Section -->
+  <section id="why">
+    <h2>Why Choose CMSTUDIOS</h2>
+    <div class="why-us">
+      <div class="card"><i class="fas fa-bolt"></i><h3>Fast Delivery</h3><p>Quick turnaround time to get you online fast.</p></div>
+      <div class="card"><i class="fas fa-magic"></i><h3>Modern Design</h3><p>Trendy UI/UX that grabs attention.</p></div>
+      <div class="card"><i class="fas fa-search"></i><h3>SEO Ready</h3><p>Built with search engines and performance in mind.</p></div>
+      <div class="card"><i class="fas fa-headset"></i><h3>Ongoing Support</h3><p>We’re here even after launch to help you grow.</p></div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form action="mailto:youremail@example.com" method="POST" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="subject" placeholder="Service Needed (e.g. E-commerce Site)" required>
+      <textarea name="message" rows="5" placeholder="Tell us about your project..." required></textarea>
+      <button type="submit" class="btn">Send Enquiry</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="socials">
+      <a href="https://facebook.com/Ntando_J_Ngceshe" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://instagram.com/n.t.a.n.d.o.e" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://tiktok.com/@n.t.a.n.d.o0" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <p>&copy; 2025 CMSTUDIOS. All rights reserved.</p>
+  </footer>
+
+  <script>
+  // Require login to access this page
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  if (!loggedInUser) {
+    alert("Please log in to access CMSTUDIOS services.");
+    window.location.href = "index.html";
+  }
+
+  // Add bubble effect on all nav links, menu toggle, buttons, logout icon
+  const bubbleElements = [
+    ...document.querySelectorAll('nav ul li a'),
+    document.querySelector('.menu-toggle'),
+    ...document.querySelectorAll('.btn'),
+    document.querySelector('.logout-icon')
+  ];
+
+  bubbleElements.forEach(el => {
+    el.addEventListener('click', function(e) {
+      const rect = this.getBoundingClientRect();
+      const bubblesCount = Math.floor(Math.random() * 3) + 4;
+
+      for (let i = 0; i < bubblesCount; i++) {
+        const bubble = document.createElement('span');
+        bubble.classList.add('bubble');
+
+        const size = Math.floor(Math.random() * 15) + 15;
+        bubble.style.width = size + 'px';
+        bubble.style.height = size + 'px';
+
+        const offsetX = e.clientX - rect.left - size / 2 + (Math.random() * 30 - 15);
+        const offsetY = e.clientY - rect.top - size / 2 + (Math.random() * 30 - 15);
+        bubble.style.left = offsetX + 'px';
+        bubble.style.top = offsetY + 'px';
+
+        this.appendChild(bubble);
+        setTimeout(() => bubble.remove(), 800);
+      }
+    });
+  });
+
+  // Show custom logout modal
+  function logoutUser() {
+    document.getElementById('logoutModal').style.display = 'flex';
+  }
+
+  // Confirm logout
+  document.getElementById('confirmLogout').addEventListener('click', () => {
+    localStorage.removeItem("loggedInUser");
+    alert("You have been logged out.");
+    window.location.href = "Login.html";
+  });
+
+  // Cancel logout
+  document.getElementById('cancelLogout').addEventListener('click', () => {
+    document.getElementById('logoutModal').style.display = 'none';
+  });
+
+        // Optional: Close modal if clicking outside the modal content
+        window.addEventListener('click', function(e) {
+        const modal = document.getElementById('logoutModal');
+        if (e.target === modal) {
+         modal.style.display = 'none';
+      }
+     });
+   </script>
+
+</body>
+</html>
